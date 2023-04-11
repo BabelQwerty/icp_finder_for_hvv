@@ -133,9 +133,9 @@ def get_paging_link(response , base_url = "https://data.chinaz.com/"):
     try:
         page_link =  [ urljoin( base_url,i) for i in  list(set(Selector(response.text).xpath("//html/body/div[2]/div[2]/div/div/ul/li/a[contains(@href,'com')]/@href").extract() ))] 
     except Exception as e:
-        logger.info("Nope paging")
+        logger.debug("Nope paging")
         return 
-    logger.info(repr(page_link))
+    logger.debug(repr(page_link))
     return page_link
 
 @task_wrap
@@ -155,7 +155,7 @@ def comapany_search(target):
     # if page_link:
     #     for link in page_link : company_link.extend(get_company_link(page_text = requests.get(link.get('link') , headers = headers).text , target = link.get('company')))
     
-    logger.success(f"page_link: {str(len(company_link))}")
+    logger.debug(f"page_link: {str(len(company_link))}")
     logger.debug(company_link )
     
 
@@ -163,7 +163,7 @@ def comapany_search(target):
         _req2 = requests.get(link.get('link') , headers = headers)
         domains.extend(get_domain(response =_req2.text ) )
         if "对外投资" in _req2.text:_FenZhiJiGou.extend(get_FenZiJiGou(Selector( _req2.text )))
-    logger.success(f"company len: {str(len(domains))}")
+    logger.debug(f"company len: {str(len(domains))}")
     # print(*domains , sep="\n")
     return domains
 
@@ -190,7 +190,7 @@ def get_company_detail(target):
             link_list.extend([ main_company+"".join(i) for i in _sel.xpath('//body/div/div/div/ul/li/a/text()').extract() ] )
             link_list.append(main_company)
     logger.debug(link_list)
-    logger.info(f"company len: {str(len(main_company))}")
+    logger.debug(f"company len: {str(len(main_company))}")
     for index , value  in enumerate(_domains):
         if "," in  value:
             _domains.extend(_domains.pop(index).split(","))
@@ -218,5 +218,5 @@ if __name__ == "__main__":
     for i in _FenZhiJiGou:sys.stderr.write(str(i)+"\n")
     if loop:
         for i in _FenZhiJiGou:
-            logger.info(i)
+            logger.info(f"finding {i} ")
             print(*comapany_search(i.split('|')[0]) , sep ="\n")
