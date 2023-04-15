@@ -210,7 +210,7 @@ if __name__ == "__main__":
         targets.remove('-l')
     else:
         loop = False
-    logger.info(targets)
+    logger.info("finding {}".format(",".join(targets)))
     for target in targets:
         if '.' in target:print(*get_company_detail(target) , sep = "\n")
         else:print(*comapany_search(target) , sep ="\n")
