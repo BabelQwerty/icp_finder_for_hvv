@@ -6,7 +6,7 @@ from urllib.parse import urljoin,urlparse,quote
 from sys import argv
 from tldextract import extract as domain_extract
 
-_mapper_dict = {
+duiwaitouzi_mapper_dict = {
     1:"companyName",
     2:"boss",
     3:"money",
@@ -14,9 +14,25 @@ _mapper_dict = {
     5:"date",
     0:"YingYeQingKuang"
 }
+
+touzishijian_mapper_dict = {
+    1:"companyName",
+    2:"BaiFenBi",
+    3:"date",
+    0:"area",
+}
+
+wechatapp_mapper_dict = {
+    1:"index",
+    2:"appname",
+    3:"appid",
+    0:"detail",
+}
+
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"}
 
 _FenZhiJiGou = []
+wechat_app = []
 
 
 class ColoredFormatter(logging.Formatter):
@@ -104,24 +120,67 @@ def task_wrap(wrap_func , num = 60):
     return _wrap_func
 
 def get_FenZiJiGou(  sel):
-    
     from_company = sel.xpath("//html/body/div[3]/div[2]/div/div[1]/div[1]/text()").extract()[0]
     _ = {}
     __ = []
     result = []
     for index , value in enumerate( sel.xpath("//html/body/div[3]/div[4]/div[1]/table[4]/tbody/tr/td/*/node()")):
-        _.update({_mapper_dict.get((index+1)%6) : value.extract()})
+        _.update({duiwaitouzi_mapper_dict.get((index+1)%6) : value.extract()})
         if (index+1) %  6 == 0 and index > 0:
             __.append(_)
             _ = {}
     
     for index , value in enumerate(__):
         try:
-            _ = float(value.get("BaiFenBi","").split("%")[0])
+            __ = value.get("BaiFenBi","").split("%")[0]
+            __ = "100" if __.strip() == '-' else __
+            _ = float(__)
             if  _ > 50:result.append(f'{value.get("companyName")}|{value.get("BaiFenBi")}|{from_company}')
         except Exception as e:
             pass
     return result
+
+
+
+def touzi_shijian(sel ):
+    from_company = sel.xpath("//html/body/div[3]/div[2]/div/div[1]/div[1]/text()").extract()[0]
+    _ = {}
+    __ = []
+    result = []
+    for index , value in enumerate( sel.xpath("//html/body/div[3]/div[4]/div[4]/table[2]/tbody/tr/td/*/node()")):
+        _.update({touzishijian_mapper_dict.get((index+1)%4) : value.extract()})
+        if (index+1) %  4 == 0 and index > 0:
+            __.append(_)
+            _ = {}
+    
+    for index , value in enumerate(__):
+        try:
+            __ = value.get("BaiFenBi","").split("%")[0]
+            __ = "100" if __.strip() == '-' else __
+            _ = float(__)
+            if  _ > 50:result.append(f'{value.get("companyName")}|{value.get("BaiFenBi")}|{from_company}')
+        except Exception as e:
+            pass
+    return result
+
+
+def get_wechat_app(sel):
+    from_company = sel.xpath("//html/body/div[3]/div[2]/div/div[1]/div[1]/text()").extract()[0]
+    _ = {}
+    __ = []
+    result = []
+    for index , value in enumerate( sel.xpath('//th[contains(text(),"微信号")]/../../..//tbody/tr/td/node()')):
+        _.update({wechatapp_mapper_dict.get((index+1)%4) : value.extract()})
+        if (index+1) %  4 == 0 and index > 0:
+            __.append(_)
+            _ = {}
+    
+    for index , value in enumerate(__):
+        result.append(f'{value.get("appname")}|{value.get("appid")}|{from_company}')
+    return result
+
+
+
 
 @task_wrap
 def get_company_link( target, page_text:str , base_url ="https://data.chinaz.com/" ):
@@ -163,6 +222,8 @@ def comapany_search(target):
         _req2 = requests.get(link.get('link') , headers = headers)
         domains.extend(get_domain(response =_req2.text ) )
         if "对外投资" in _req2.text:_FenZhiJiGou.extend(get_FenZiJiGou(Selector( _req2.text )))
+        if '投资事件' in  _req2.text : _FenZhiJiGou.extend(touzi_shijian(Selector(  _req2.text )))
+        if '微信公众号' in _req2.text : wechat_app.extend(get_wechat_app(Selector( _req2.text )))
     logger.debug(f"company len: {str(len(domains))}")
     # print(*domains , sep="\n")
     return domains
@@ -183,6 +244,8 @@ def get_company_detail(target):
             for x in main_company_link:
                 _ = requests.get(x , headers = headers).text
                 if "对外投资" in _:_FenZhiJiGou.extend(get_FenZiJiGou(Selector( _ )))
+                if '投资事件' in _ : _FenZhiJiGou.extend(touzi_shijian(Selector( _ )))
+                if '微信公众号' in _ : wechat_app.extend(get_wechat_app(Selector( _ )))
                 for q in  Selector( _ ).xpath("//body/div/div/div/table/tbody/tr/td/text()").extract():
                     if q.startswith('www'):
                         _domains.append( ".".join(domain_extract(q)[1:]))
@@ -212,11 +275,13 @@ if __name__ == "__main__":
         loop = False
     logger.info("finding {}".format(",".join(targets)))
     for target in targets:
-        if '.' in target:print(*get_company_detail(target) , sep = "\n")
-        else:print(*comapany_search(target) , sep ="\n")
+        if '.' in target:print(*list(set(get_company_detail(target))) , sep = "\n")
+        else:print(*list(set(comapany_search(target))), sep ="\n")
     sys.stderr.write("分支机构 \n")
-    for i in _FenZhiJiGou:sys.stderr.write(str(i)+"\n")
+    for i in list(set(_FenZhiJiGou)):sys.stderr.write(str(i)+"\n")
+    sys.stderr.write("微信公众号/小程序 \n")
+    for i in wechat_app:sys.stderr.write(str(i)+"\n")
     if loop:
-        for i in _FenZhiJiGou:
+        for i in list(set(_FenZhiJiGou)):
             logger.info(f"finding {i} ")
             print(*comapany_search(i.split('|')[0]) , sep ="\n")

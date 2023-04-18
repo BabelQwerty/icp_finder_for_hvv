@@ -25,42 +25,52 @@ python3 icp.py domain companyName -l
 ### exmaple:
 ```
 ┌──(qwerty㉿qwerty)-[/mnt/hgfs/workspace/python_workspace/icp_finder_for_hvv]
-└─$ python3 icp.py -d -l liepin.com                                                                                
-INFO - 2023-04-15 18:22:12,323 - process: 189238 - icp.py - icp - 213 - icp - finding liepin.com
+└─$ python3 icp.py -l -d liepin.com       
+INFO - 2023-04-18 14:33:27,066 - process: 790567 - icp.py - icp - 276 - icp - finding liepin.com
 liepin.cn
 分支机构 
+上海德筑企业管理有限公司|51%|同道精英(天津)信息技术有限公司
 无锡万仕道教育咨询有限公司|100%|同道精英(天津)信息技术有限公司
 浙江同道精英信息技术有限公司|100%|同道精英(天津)信息技术有限公司
-同道快才(上海)劳务派遣有限公司|100%|同道精英(天津)信息技术有限公司
 同道有薪(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司
-同道有才(广州)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司
 猎聘凯普斯(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司
+同道快才(上海)劳务派遣有限公司|100%|同道精英(天津)信息技术有限公司
+苏州宝捷会山启创业投资合伙企业(有限合伙)|-|同道精英(天津)信息技术有限公司
+同道有才(广州)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司
 同道有才(北京)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司
 同道猎聘(北京)科技有限公司|100%|同道精英(天津)信息技术有限公司
-上海德筑企业管理有限公司|51%|同道精英(天津)信息技术有限公司
-INFO - 2023-04-15 18:22:26,966 - process: 189238 - icp.py - icp - 221 - icp - finding 无锡万仕道教育咨询有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:27,884 - process: 189238 - icp.py - icp - 221 - icp - finding 浙江同道精英信息技术有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:28,196 - process: 189238 - icp.py - icp - 221 - icp - finding 同道快才(上海)劳务派遣有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:28,844 - process: 189238 - icp.py - icp - 221 - icp - finding 同道有薪(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:29,925 - process: 189238 - icp.py - icp - 221 - icp - finding 同道有才(广州)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:30,338 - process: 189238 - icp.py - icp - 221 - icp - finding 猎聘凯普斯(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:31,219 - process: 189238 - icp.py - icp - 221 - icp - finding 同道有才(北京)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:31,639 - process: 189238 - icp.py - icp - 221 - icp - finding 同道猎聘(北京)科技有限公司|100%|同道精英(天津)信息技术有限公司 
-
-INFO - 2023-04-15 18:22:32,418 - process: 189238 - icp.py - icp - 221 - icp - finding 上海德筑企业管理有限公司|51%|同道精英(天津)信息技术有限公司 
+微信公众号/小程序 
+苏小猎|liepinjiangsu|同道精英（天津）信息技术有限公司南京分公司
+猎观大闽|liepinfujian|同道精英（天津）信息技术有限公司广州分公司
+小猎青年白领招聘|liepin_young|同道精英（天津）信息技术有限公司广州分公司
+猎聘网订阅号测试号|liepinwang|同道精英(天津)信息技术有限公司
+猎聘网订阅号测试号|gh_fe83a899898b|同道精英(天津)信息技术有限公司
+INFO - 2023-04-18 14:33:32,796 - process: 790567 - icp.py - icp - 286 - icp - finding 上海德筑企业管理有限公司|51%|同道精英(天津)信息技术有限公司 
+cgladvisory.com
 cgladvisory.cn
 wearecgl.cn
-rencaigeili.com
 wearecgl.com
-cgladvisory.com
 sts-partner.com
+rencaigeili.com
+INFO - 2023-04-18 14:33:34,947 - process: 790567 - icp.py - icp - 286 - icp - finding 无锡万仕道教育咨询有限公司|100%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:35,631 - process: 790567 - icp.py - icp - 286 - icp - finding 浙江同道精英信息技术有限公司|100%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:35,974 - process: 790567 - icp.py - icp - 286 - icp - finding 同道有薪(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:36,997 - process: 790567 - icp.py - icp - 286 - icp - finding 猎聘凯普斯(天津)信息技术有限公司|51%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:37,803 - process: 790567 - icp.py - icp - 286 - icp - finding 同道快才(上海)劳务派遣有限公司|100%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:38,176 - process: 790567 - icp.py - icp - 286 - icp - finding 苏州宝捷会山启创业投资合伙企业(有限合伙)|-|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:38,866 - process: 790567 - icp.py - icp - 286 - icp - finding 同道有才(广州)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:39,339 - process: 790567 - icp.py - icp - 286 - icp - finding 同道有才(北京)人力资源服务有限公司|100%|同道精英(天津)信息技术有限公司 
+
+INFO - 2023-04-18 14:33:39,908 - process: 790567 - icp.py - icp - 286 - icp - finding 同道猎聘(北京)科技有限公司|100%|同道精英(天津)信息技术有限公司 
+
+ 
 ```
 
 
@@ -104,9 +114,13 @@ wearecgl.cn
 wearecgl.com
 ```
 
+### pipeline command:
 pipeline automate with [yscan](https://github.com/xiaoyaochen/yscan) and [subfinder](https://github.com/projectdiscovery/subfinder) :
 ```
-python3 icp.py -d -l xxx.com | grep -E "[a-zA-Z0-9.\\/_&=@$%?~#-]" | ./subfinder -silent | ./yscan-cli -ip - -json xxxx.com.json
+python3 icp.py -d -l xxx.com | \
+    grep -E "[a-zA-Z0-9.\\/_&=@$%?~#-]" |\
+    ./subfinder -silent |\
+    ./yscan-cli -ip - -json xxxx.com.json
 ```
 
 e.g.
